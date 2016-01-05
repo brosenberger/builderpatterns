@@ -70,9 +70,7 @@ public class PetLover implements Person {
             } else {
                 person = new PetLover(this);
             }
-            if (person.getPet() == null)
-
-            {
+            if (person.getPet() == null) {
                 throw new NoPetException("Everyone must have pet!");
             }
             return person;
