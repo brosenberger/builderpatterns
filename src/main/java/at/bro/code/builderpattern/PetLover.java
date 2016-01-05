@@ -10,7 +10,7 @@ public class PetLover implements Person {
     private final int age;
     private final Pet pet;
 
-    public PetLover(PetLoverBuilder b) {
+    protected PetLover(PetLoverBuilder b) {
         this.name = b.name;
         this.age = b.age;
         this.pet = b.pet;
@@ -35,7 +35,7 @@ public class PetLover implements Person {
         return new PetLoverBuilder(name);
     }
 
-    public static class PetLoverBuilder implements PetHolder, PetStep, AgeStep, BuildStep {
+    public static class PetLoverBuilder implements PetHolder, PetStep, BuildAndAgeStep {
         private final String name;
         private int age;
         private Pet pet;
@@ -51,7 +51,7 @@ public class PetLover implements Person {
         }
 
         @Override
-        public <PETBUILDER extends AbstractPet.Builder<?, PET, BuildStep>, PET extends AbstractPet> PETBUILDER pet(
+        public <PETBUILDER extends AbstractPet.Builder<?, PET, BuildAndAgeStep>, PET extends AbstractPet> PETBUILDER pet(
                 PETBUILDER petBuilder) {
             petBuilder.setParent(this);
             return petBuilder;
@@ -64,8 +64,15 @@ public class PetLover implements Person {
 
         @Override
         public PetLover build() {
-            final PetLover person = new PetLover(this);
-            if (person.getPet() == null) {
+            PetLover person;
+            if (this.age > 65) {
+                person = new SeniorPetLover(this);
+            } else {
+                person = new PetLover(this);
+            }
+            if (person.getPet() == null)
+
+            {
                 throw new NoPetException("Everyone must have pet!");
             }
             return person;
@@ -73,15 +80,19 @@ public class PetLover implements Person {
     }
 
     public static interface PetStep {
-        <PETBUILDER extends AbstractPet.Builder<?, PET, BuildStep>, PET extends AbstractPet> PETBUILDER pet(
+        <PETBUILDER extends AbstractPet.Builder<?, PET, BuildAndAgeStep>, PET extends AbstractPet> PETBUILDER pet(
                 PETBUILDER petBuilder);
+    }
+
+    public static interface BuildAndAgeStep extends PetHolder, AgeStep, BuildStep {
+
     }
 
     public static interface AgeStep {
         BuildStep age(int age);
     }
 
-    public static interface BuildStep extends PetHolder, AgeStep {
+    public static interface BuildStep {
         public PetLover build();
     }
 }

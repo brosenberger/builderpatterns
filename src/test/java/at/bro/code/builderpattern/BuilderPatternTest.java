@@ -68,4 +68,27 @@ public class BuilderPatternTest {
                 // building is also allowed here, but no more pets
                 .build();
     }
+
+    @Test
+    void testObjectVariationBuilding() {
+        final Person august = PetLover.create("August")
+                // pet
+                .pet(BorderColly.create("Heinz")).build()
+                // set age to senior
+                .age(70)
+                // build person
+                .build();
+
+        final Person fritz = PetLover.create("Fritz")
+                // pet
+                .pet(Emu.create("Franzi")).build()
+                // age
+                .age(20)
+                // build
+                .build();
+
+        Assert.assertTrue(august instanceof SeniorPetLover);
+        Assert.assertTrue(fritz instanceof PetLover);
+        Assert.assertFalse(fritz instanceof SeniorPetLover);
+    }
 }

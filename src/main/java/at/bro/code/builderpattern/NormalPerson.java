@@ -10,7 +10,7 @@ public class NormalPerson implements Person {
     private final int age;
     private final Pet pet;
 
-    public NormalPerson(PersonBuilder b) {
+    private NormalPerson(PersonBuilder b) {
         this.name = b.name;
         this.age = b.age;
         this.pet = b.pet;
