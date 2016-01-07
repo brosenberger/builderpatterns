@@ -1,5 +1,6 @@
 package at.bro.code.builderpattern;
 
+import at.bro.code.builderpattern.BorderColly.BorderCollyBuilder;
 import at.bro.code.builderpattern.exceptions.NoPetException;
 import at.bro.code.builderpattern.interfaces.Person;
 import at.bro.code.builderpattern.interfaces.Pet;
@@ -47,6 +48,10 @@ public class NormalPerson implements Person {
         public PersonBuilder age(int age) {
             this.age = age;
             return this;
+        }
+
+        public BorderCollyBuilder<PersonBuilder> borderColly(String name) {
+            return pet(BorderColly.create(name));
         }
 
         public <PETBUILDER extends AbstractPet.Builder<?, PET, PersonBuilder>, PET extends AbstractPet> PETBUILDER pet(

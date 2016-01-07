@@ -27,7 +27,7 @@ public class BuilderPatternTest {
     void testOverridingPet() {
         final Person daniel = NormalPerson.create("Daniel")
                 // setting first pet
-                .pet(BorderColly.create("Schocko")).build()
+                .borderColly("Schoko").build()
                 // now overriding pet
                 .pet(Emu.create("Tweety")).build()
                 // build person
@@ -73,7 +73,7 @@ public class BuilderPatternTest {
     void testObjectVariationBuilding() {
         final Person august = PetLover.create("August")
                 // pet
-                .pet(BorderColly.create("Heinz")).build()
+                .borderColly("Heinz").build()
                 // set age to senior
                 .age(70)
                 // build person

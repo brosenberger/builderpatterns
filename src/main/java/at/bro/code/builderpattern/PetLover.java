@@ -1,5 +1,6 @@
 package at.bro.code.builderpattern;
 
+import at.bro.code.builderpattern.BorderColly.BorderCollyBuilder;
 import at.bro.code.builderpattern.exceptions.NoPetException;
 import at.bro.code.builderpattern.interfaces.Person;
 import at.bro.code.builderpattern.interfaces.Pet;
@@ -51,6 +52,11 @@ public class PetLover implements Person {
         }
 
         @Override
+        public BorderCollyBuilder<BuildAndAgeStep> borderColly(String name) {
+            return pet(BorderColly.create(name));
+        }
+
+        @Override
         public <PETBUILDER extends AbstractPet.Builder<?, PET, BuildAndAgeStep>, PET extends AbstractPet> PETBUILDER pet(
                 PETBUILDER petBuilder) {
             petBuilder.setParent(this);
@@ -78,6 +84,8 @@ public class PetLover implements Person {
     }
 
     public static interface PetStep {
+        BorderCollyBuilder<BuildAndAgeStep> borderColly(String name);
+
         <PETBUILDER extends AbstractPet.Builder<?, PET, BuildAndAgeStep>, PET extends AbstractPet> PETBUILDER pet(
                 PETBUILDER petBuilder);
     }
