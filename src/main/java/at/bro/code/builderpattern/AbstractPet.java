@@ -66,7 +66,7 @@ public abstract class AbstractPet implements Pet {
         }
 
         @Override
-        public PARENT build() {
+        public PARENT buildPetAndBackToPersonBuilder() {
             final OBJECT o = createObject();
             validateObject(o);
             parentBuilder.setPet(o);

@@ -16,7 +16,7 @@ public class BuilderPatternTest {
                 // setting age
                 .age(12)
                 // setting pet
-                .pet(BorderColly.create("Collins")).toy("Bone").build()
+                .pet(BorderColly.create("Collins")).toy("Bone").buildPetAndBackToPersonBuilder()
                 // build person
                 .build();
 
@@ -27,9 +27,9 @@ public class BuilderPatternTest {
     void testOverridingPet() {
         final Person daniel = NormalPerson.create("Daniel")
                 // setting first pet
-                .borderColly("Schoko").build()
+                .borderColly("Schoko").buildPetAndBackToPersonBuilder()
                 // now overriding pet
-                .pet(Emu.create("Tweety")).build()
+                .pet(Emu.create("Tweety")).buildPetAndBackToPersonBuilder()
                 // build person
                 .build();
 
@@ -42,7 +42,7 @@ public class BuilderPatternTest {
                 // setting age
                 .age(10)
                 // setting pet
-                .pet(Emu.create("Erwin")).legCount(100).build()
+                .pet(Emu.create("Erwin")).legCount(100).buildPetAndBackToPersonBuilder()
                 // build person
                 .build();
     }
@@ -56,7 +56,7 @@ public class BuilderPatternTest {
     void testGuidedPersonBuilder() {
         PetLover.create("Toni")
                 // pets come first for pet lovers!
-                .pet(BorderColly.create("Pepper")).build()
+                .pet(BorderColly.create("Pepper")).buildPetAndBackToPersonBuilder()
                 // now the age, but a pet can only be set once!
                 .age(10)
                 // build person
@@ -64,7 +64,7 @@ public class BuilderPatternTest {
 
         PetLover.create("Lucy")
                 // pets come first for pet lovers!
-                .pet(BorderColly.create("Judy")).build()
+                .pet(BorderColly.create("Judy")).buildPetAndBackToPersonBuilder()
                 // building is also allowed here, but no more pets
                 .build();
     }
@@ -73,7 +73,7 @@ public class BuilderPatternTest {
     void testObjectVariationBuilding() {
         final Person august = PetLover.create("August")
                 // pet
-                .borderColly("Heinz").build()
+                .borderColly("Heinz").buildPetAndBackToPersonBuilder()
                 // set age to senior
                 .age(70)
                 // build person
@@ -81,7 +81,7 @@ public class BuilderPatternTest {
 
         final Person fritz = PetLover.create("Fritz")
                 // pet
-                .pet(Emu.create("Franzi")).build()
+                .pet(Emu.create("Franzi")).buildPetAndBackToPersonBuilder()
                 // age
                 .age(20)
                 // build
